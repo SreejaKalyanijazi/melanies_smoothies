@@ -7,22 +7,13 @@ st.title("Customize your smoothie :cup_with_straw:")
 st.write(
  "Choose fruits that you want in your custom smoothie"
 )
-
 name_on_the_order = st.text_input("Name on the Smoothie:")
 st.write("The name on your Smoothie will be", name_on_the_order)
-
-# option = st.selectbox(
-#     "What is your favorite fruit?",
-#     ("Banana", "Apple", "Strawberries", "Mango"))
-
-# st.write("Your favorite fruit is:", option)
 cnx=st.connection("snowflake")
 session = cnx.session()
 my_dataframe = session.table("smoothies.public.fruit_options").select(col('FRUIT_NAME'),col('SEARCH_ON'))
 #st.dataframe(data=my_dataframe, use_container_width=True)
 pd_df=my_dataframe.to_pandas()
-# st.dataframe(pd_df)
-# st.stop()
 ingredients_list=st.multiselect(
     'Choose upto 5 ingredients:'
     ,my_dataframe
